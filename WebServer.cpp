@@ -63,7 +63,7 @@ std::string CreateRespose(WebServer* srv, string msg)
 			pathFile += filename;
 		}
 		FILE *fp;
-		fp = fopen(pathFile.c_str(), "r");
+		fp = fopen(pathFile.c_str(), "rb");
 		if(fp == NULL)
 		{
 			std::string body = "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">"
@@ -98,8 +98,12 @@ std::string CreateRespose(WebServer* srv, string msg)
 			delete[] content;
 			return "ERROR";
 		}
-		content[size] = '\0';
 		fclose(fp);
+		content[size] = '\0';
+		if(content[size-1] == '\n'){
+			--size;
+			content[size] = '\0';
+		}
 		char bufInt[12]={0};
 		sprintf(bufInt, "%d", size);
 		res += bufInt;
