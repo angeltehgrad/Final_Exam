@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <syslog.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 #define DAEMON_NAME "WebServerdaemon"
 
@@ -19,6 +20,7 @@ int main(int argc, char **argv) {
 	char *ip;
 	char *dir;
 	int c;
+	signal(SIGHUP, SIG_IGN);
 	while ((c = getopt (argc, argv, "h:p:d:")) != -1)
 	{
 		switch (c) {
