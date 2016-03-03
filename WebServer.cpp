@@ -81,7 +81,7 @@ std::string CreateRespose(WebServer* srv, string msg)
 			char bufInt[12]={0};
 			sprintf(bufInt, "%d", body.size());
 			res += bufInt;
-			res += "Content-Type: text/html\r\n" "\r\n";
+			res += "\r\n" "Content-Type: text/html\r\n" "\r\n";
 			res += body;
 			return res;
 		}
